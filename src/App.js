@@ -8,7 +8,10 @@ function App() {
 
   // Function that add new dates
   const createdDate = date => {
-    console.log(date);
+    saveDates([
+      ...dates,
+      date
+    ]);
   }
 
   return (

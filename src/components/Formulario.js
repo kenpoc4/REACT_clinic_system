@@ -37,12 +37,18 @@ const Formulario = ( {createdDate} ) => {
 
         // Assign ID
         date.id = uuid();
-        console.log(date);
 
         // Create date
         createdDate(date);
 
         // Restart form
+        updateDate({
+            pet:'',
+            name:'',
+            consult:'',
+            time:'',
+            symptom:''
+        })
     }
 
     return ( 
@@ -68,7 +74,7 @@ const Formulario = ( {createdDate} ) => {
                     className="u-full-width"
                     placeholder="Pet's Name"
                     onChange={updateState}
-                    valu={pet}
+                    value={pet}
                 />
                 <label>Daddy/Mommy's name</label>
                 <input
@@ -77,7 +83,7 @@ const Formulario = ( {createdDate} ) => {
                     className="u-full-width"
                     placeholder="Pet's owner"
                     onChange={updateState}
-                    valu={name}
+                    value={name}
                 />
                 <label>Date</label>
                 <input
@@ -85,7 +91,7 @@ const Formulario = ( {createdDate} ) => {
                     name="consult"
                     className="u-full-width"
                     onChange={updateState}
-                    valu={consult}
+                    value={consult}
                 />
                 <label>Time</label>
                 <input
@@ -93,14 +99,14 @@ const Formulario = ( {createdDate} ) => {
                     name="time"
                     className="u-full-width"
                     onChange={updateState}
-                    valu={time}
+                    value={time}
                 />
                 <label>Symptom</label>
                 <textarea
                     className="u-full-width"
                     name="symptom"
                     onChange={updateState}
-                    valu={symptom}
+                    value={symptom}
                 ></textarea>
                 <button
                     type="submit"
