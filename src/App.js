@@ -1,10 +1,28 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Formulario from './components/Formulario';
+import Date from './components/Date';
 
 function App() {
 
+  // Dates in local storage
+  let datesInitials = JSON.parse( localStorage.getItem( 'dates' ) );
+  if( !datesInitials ) {
+    datesInitials = [];
+  }
+
   // Array dates
-  const [dates, saveDates] = useState( [  ] );
+  const [dates, saveDates] = useState( datesInitials );
+
+  // Lisening  events in dates
+  useEffect( () => {
+    if( datesInitials ) {
+
+      localStorage.setItem( 'dates', JSON.stringify( dates ) );
+    } else {
+
+      localStorage.setItem( 'dates', JSON.stringify( [] ) );
+    }
+  }, [dates, datesInitials] );
 
   // Function that add new dates
   const createdDate = date => {
@@ -13,6 +31,15 @@ function App() {
       date
     ]);
   }
+
+  // Function for delete date by ID
+  const deleteDate = id => {
+    const newDates = dates.filter(date => date.id !== id);
+    saveDates(newDates);
+  }
+
+  // Conditional message
+  const title = dates.length === 0 ? 'There is not appointments' : 'Manage your appointment';
 
   return (
     <Fragment>
@@ -25,7 +52,14 @@ function App() {
             />
           </div>
           <div className="one-half column">
-            2
+            <h2>{title}</h2>
+            {dates.map(date => (
+              <Date 
+                key={date.id}
+                date={date}
+                deleteDate={deleteDate}
+              />
+            ))}
           </div>
         </div>
       </div>
